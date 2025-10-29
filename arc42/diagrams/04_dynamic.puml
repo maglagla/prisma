@@ -1,0 +1,18 @@
+@startuml
+!include <C4/C4_Dynamic>
+
+title Laufzeitszenario: Fallanalyse
+
+Person(user, "Analyst:in")
+Container(frontend, "Frontend")
+Container(analysis, "Analysemodul")
+Container(policy, "Policy Engine")
+Container(storage, "Datenhaltung")
+
+Rel(user, frontend, "legt Fall an")
+Rel(frontend, analysis, "stellt Analyse-Request")
+Rel(analysis, policy, "fragt Policy")
+Rel(policy, storage, "erlaubt/verbietet Zugriff")
+Rel(analysis, user, "liefert Ergebnis")
+
+@enduml

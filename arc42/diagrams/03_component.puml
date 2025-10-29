@@ -1,0 +1,13 @@
+@startuml
+!include <C4/C4_Component>
+
+Container_Boundary(governance, "Governance & Security") {
+  Component(policy, "Policy Engine", "OPA", "setzt Zugriff & Zweckbindung durch")
+  Component(audit, "Audit-Log", "WORM-Storage", "unveränderbare Logs")
+  Component(retention, "Retention Engine", "Scheduler", "Datenlöschung nach Regeln")
+}
+
+Rel(policy, audit, "schreibt Entscheidungen")
+Rel(retention, audit, "meldet Löschungen")
+
+@enduml

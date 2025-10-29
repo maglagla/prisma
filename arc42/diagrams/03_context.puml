@@ -1,0 +1,19 @@
+@startuml
+!include ./C4/C4_Context.puml
+
+Person(user, "Nutzer", "Analyst:in / Ermittler:in / Compliance")
+System(system, "Analyseplattform", "Open-Source-Palantir-Variante")
+
+System_Ext(src1, "Datenquellen", "DBs, APIs, Open Data")
+System_Ext(src2, "Externe Behörden-Systeme", "Justiz, Partnerbehörden")
+System_Ext(idp, "Identity Provider", "z.B. Keycloak")
+System_Ext(audit, "Audit-System", "Immutable Logging / SIEM")
+
+Rel(user, system, "Verwendet")
+Rel(src1, system, "liefert Daten")
+Rel(src2, system, "liefert / empfängt Fallinformationen")
+Rel(idp, system, "Authentifiziert")
+Rel(system, audit, "schreibt Logs")
+
+@enduml
+

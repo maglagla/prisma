@@ -1,0 +1,17 @@
+@startuml
+!include <C4/C4_Container>
+
+Person(user, "Analyst:in")
+System_Boundary(system, "Analyseplattform") {
+  Container(ingest, "Ingestion", "Airbyte/NiFi", "Datenaufnahme")
+  Container(storage, "Datenhaltung", "Postgres/GraphDB", "Speichert Roh- & Modell-Daten")
+  Container(analysis, "Analyse", "Jupyter/ML/OR", "Analysen & Modelle")
+  Container(frontend, "Frontend", "Superset/Low-Code", "UI für Dashboards & Workflows")
+}
+
+Rel(user, frontend, "nutzt")
+Rel(ingest, storage, "lädt Daten")
+Rel(analysis, storage, "zieht Daten")
+Rel(frontend, analysis, "stellt Anfragen")
+
+@enduml

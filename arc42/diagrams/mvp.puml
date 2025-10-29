@@ -1,0 +1,18 @@
+@startuml
+!include <C4/C4_Context>
+!include <C4/C4_Component>
+
+Person(user, "Analyst:in", "Nutzt Prisma für transparente Datenanalysen")
+
+System_Boundary(prisma, "Prisma MVP") {
+  Container(ingest, "Ingest", "Python/FastAPI", "Importiert Datenquellen, normalisiert in Graph-Modell")
+  Container(db, "Graph DB", "Neo4j", "Speichert Entities und Relationen")
+  Container(api, "Backend API", "FastAPI", "Stellt Daten und Queries bereit")
+  Container(ui, "Frontend", "React + Cytoscape.js", "Visualisiert Graphen und ermöglicht Exploration")
+}
+
+Rel(user, ui, "nutzt")
+Rel(ui, api, "API Calls")
+Rel(api, db, "greift auf zu")
+Rel(ingest, db, "schreibt in")
+@enduml
