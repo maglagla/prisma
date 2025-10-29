@@ -5,6 +5,13 @@ First install this (once):
 brew install plantuml pandoc tectonic 
 ```
 
+Run this (once):
+```
+    chmod +x build.sh
+    chmod +x get-plantuml.sh
+    ./get-plantuml.sh
+```
+
 Then just run
 ```
     ./build.sh
